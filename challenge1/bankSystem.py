@@ -40,7 +40,7 @@ try:
                 except Exception as e:
                     raise ValueError
 
-                if qtd_saques > 0 and valor_saque <= 500 and saldo >= valor_saque:
+                if qtd_saques > 0 and valor_saque <= 500 and saldo >= valor_saque and valor_saque > 0:
                     qtd_saques -= 1
                     saldo -= valor_saque
                     extrato.append(f"Saque de R$ {valor_saque}")
@@ -53,6 +53,12 @@ try:
             case 'd':
                 try:
                     valor_deposito = float(input("Valor para depósito: "))
+                    if valor_deposito <= 0:
+                        print("Valor inválido.")
+                    else:
+                        saldo += valor_deposito
+                        extrato.append(f"Depósito de R$ {valor_deposito}")
+                        print("Depósito realizado com sucesso.")
                 except:
                     raise ValueError
 
